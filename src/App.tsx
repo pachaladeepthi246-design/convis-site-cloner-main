@@ -9,6 +9,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import VerifyEmail from './pages/VerifyEmail';
 import Dashboard from './pages/Dashboard';
+import Projects from './pages/dashboard/Projects.tsx';
+import Analytics from './pages/dashboard/Analytics.tsx';
+import Profile from './pages/dashboard/Profile.tsx';
+import Settings from './pages/dashboard/Settings.tsx';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -30,7 +34,12 @@ function App() {
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
-            } />
+            }>
+              <Route path="projects" element={<Projects />} />
+              <Route path="analytics" element={<Analytics />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
           </Routes>
           <Footer />
         </div>
