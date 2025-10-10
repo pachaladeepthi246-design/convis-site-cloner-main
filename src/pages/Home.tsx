@@ -1,5 +1,6 @@
 import { TestimonialsColumn } from "../components/ui/testimonials-columns-1";
 import { Logos3 } from "../components/ui/logos3";
+import { Features } from "../components/ui/features";
 
 const testimonials = [
   {
@@ -91,6 +92,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Features />
       <Logos3 />
       <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
         <div className="flex flex-row gap-6">
