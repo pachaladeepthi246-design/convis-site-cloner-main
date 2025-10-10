@@ -4,7 +4,20 @@ import { Briefcase, Users, Globe, Code, UserCheck, CheckCircle, ArrowRight } fro
 import PageHero from '../components/PageHero';
 import AnimatedSection from '../components/AnimatedSection';
 import GlassCard from '../components/GlassCard';
-import { supabase, Service } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
+
+interface Service {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: string;
+  hero_image: string;
+  slug: string;
+  is_active: boolean;
+  order_index: number;
+  features: any[];
+}
 
 const iconMap: Record<string, any> = {
   briefcase: Briefcase,
