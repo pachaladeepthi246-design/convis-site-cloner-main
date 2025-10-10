@@ -82,8 +82,8 @@ export default function Contact() {
             ].map((item, index) => (
               <AnimatedSection key={index} delay={index * 0.1}>
                 <GlassCard className="p-8 text-center h-full">
-                  <div className="backdrop-blur-xl bg-white/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                    <item.icon className="w-8 h-8 text-white" />
+                  <div className="backdrop-blur-xl bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <item.icon className="w-8 h-8 text-primary" />
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
                   <a
@@ -193,7 +193,7 @@ export default function Contact() {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full backdrop-blur-xl bg-white text-slate-900 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/90 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full text-lg font-semibold transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'} <Send className="w-5 h-5" />
                 </motion.button>
@@ -204,7 +204,7 @@ export default function Contact() {
                     animate={{ opacity: 1, y: 0 }}
                     className={`p-4 rounded-xl ${
                       submitMessage.includes('Thank you')
-                        ? 'backdrop-blur-xl bg-emerald-500/20 border border-emerald-500/50 text-emerald-300'
+                        ? 'backdrop-blur-xl bg-primary/20 border border-primary/50 text-primary-light'
                         : 'backdrop-blur-xl bg-red-500/20 border border-red-500/50 text-red-300'
                     }`}
                   >

@@ -55,7 +55,7 @@ export default function Header() {
                   className="text-white/90 hover:text-white transition-colors relative group"
                 >
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full" />
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
                 </a>
               ))}
             </nav>
@@ -84,7 +84,7 @@ export default function Header() {
                   </a>
                   <a
                     href="/signup"
-                    className="backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-semibold border border-white/30 transition-all"
+                    className="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-semibold transition-all"
                   >
                     Sign Up
                   </a>

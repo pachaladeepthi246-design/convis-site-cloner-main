@@ -60,7 +60,7 @@ export default function Testimonials() {
                             <Star
                               key={i}
                               className={`w-5 h-5 ${
-                                i < testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-white/30'
+                                i < testimonial.rating ? 'text-primary-light fill-primary-light' : 'text-white/30'
                               }`}
                             />
                           ))}

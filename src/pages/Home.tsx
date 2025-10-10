@@ -62,14 +62,14 @@ export default function Home() {
               return (
                 <AnimatedSection key={service.id} delay={index * 0.1}>
                   <GlassCard className="p-8 h-full flex flex-col">
-                    <div className="backdrop-blur-xl bg-white/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
-                      <Icon className="w-8 h-8 text-white" />
+                    <div className="backdrop-blur-xl bg-primary/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                      <Icon className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
                     <p className="text-white/70 mb-6 flex-grow">{service.subtitle}</p>
                     <a
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 text-white hover:gap-4 transition-all"
+                      className="inline-flex items-center gap-2 text-primary-light hover:gap-4 transition-all font-semibold"
                     >
                       Explore Service <ArrowRight className="w-4 h-4" />
                     </a>
@@ -115,7 +115,7 @@ export default function Home() {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-3"
                   >
-                    <CheckCircle className="w-6 h-6 text-emerald-400 flex-shrink-0" />
+                    <CheckCircle className="w-6 h-6 text-primary flex-shrink-0" />
                     <span className="text-white/80 text-lg">{item}</span>
                   </motion.div>
                 ))}
@@ -125,7 +125,7 @@ export default function Home() {
                 href="/about"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-block mt-8 backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-full font-semibold border border-white/30 transition-all"
+                className="inline-block mt-8 bg-primary/20 hover:bg-primary/30 text-primary-light px-8 py-4 rounded-full font-semibold border border-primary/30 transition-all"
               >
                 Learn More About Us
               </motion.a>
@@ -163,8 +163,8 @@ export default function Home() {
             ].map((step, index) => (
               <AnimatedSection key={index} delay={index * 0.15}>
                 <GlassCard className="p-8 text-center">
-                  <div className="backdrop-blur-xl bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <step.icon className="w-10 h-10 text-white" />
+                  <div className="backdrop-blur-xl bg-primary/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <step.icon className="w-10 h-10 text-primary" />
                   </div>
                   <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
                   <p className="text-white/70">{step.description}</p>

@@ -21,7 +21,7 @@ export default function NewsletterSignup() {
                 type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="backdrop-blur-xl bg-white text-slate-900 px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-all whitespace-nowrap"
+                className="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold transition-all whitespace-nowrap"
               >
                 Subscribe
               </motion.button>
