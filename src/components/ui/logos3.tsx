@@ -64,7 +64,7 @@ export const Logos3 = () => {
         <div className="flex flex-col gap-10">
           <div className="flex flex-col items-center gap-4">
             <div className="text-center text-4xl tracking-tight font-medium text-white">
-              Trusted by teams at over 1,000 of the world’s leading organizations
+              Trusted by teams at over 1,000 of the world's leading organizations
             </div>
           </div>
           <Carousel
