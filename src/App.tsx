@@ -27,6 +27,8 @@ import BlogEditor from './pages/admin/BlogEditor';
 import CareersManager from './pages/admin/CareersManager';
 import CareerEditor from './pages/admin/CareerEditor';
 import ContactSubmissions from './pages/admin/ContactSubmissions';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -49,6 +51,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
 
             <Route
               path="/admin"

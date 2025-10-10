@@ -101,10 +101,10 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} Clyrox. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/privacy-policy" className="text-white/60 hover:text-white transition-colors">
                 Privacy Policy
               </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors">
+              <a href="/terms-of-service" className="text-white/60 hover:text-white transition-colors">
                 Terms of Service
               </a>
             </div>
