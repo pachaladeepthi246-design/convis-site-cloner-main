@@ -8,10 +8,8 @@ import { Link, useLocation } from "react-router-dom";
 const navItems = [
   { name: "Home", id: "home", path: "/" },
   { name: "Features", id: "features", path: "/#features" },
-  { name: "How It Works", id: "how-it-works", path: "/#how-it-works" },
-  { name: "Testimonials", id: "testimonials", path: "/#testimonials" },
   { name: "Pricing", id: "pricing", path: "/#pricing" },
-  { name: "FAQ", id: "faq", path: "/#faq" },
+  { name: "Blog", id: "blog", path: "/blog" },
   { name: "Contact", id: "contact", path: "/contact" },
 ];
 
@@ -44,7 +42,7 @@ export const Header = () => {
   const getLinkClassName = (item: typeof navItems[0]) => {
     const isActive = isHomePage 
       ? activeSection === item.id 
-      : location.pathname === item.path;
+      : location.pathname === item.path || (item.path === "/blog" && location.pathname.startsWith("/blog/"));
       
     return cn(
       "transition-colors hover:text-white",
