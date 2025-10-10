@@ -18,7 +18,10 @@ import Projects from './pages/dashboard/Projects';
 import Analytics from './pages/dashboard/Analytics';
 import Profile from './pages/dashboard/Profile';
 import Settings from './pages/dashboard/Settings';
-import Admin from './pages/Admin';
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import ServicesManager from './pages/admin/ServicesManager';
+import ServiceEditor from './pages/admin/ServiceEditor';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -46,10 +49,16 @@ function App() {
               path="/admin"
               element={
                 <ProtectedRoute>
-                  <Admin />
+                  <AdminLayout />
                 </ProtectedRoute>
               }
-            />
+            >
+              <Route index element={<AdminDashboard />} />
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="services" element={<ServicesManager />} />
+              <Route path="services/new" element={<ServiceEditor />} />
+              <Route path="services/edit/:id" element={<ServiceEditor />} />
+            </Route>
 
             <Route
               path="/dashboard"
