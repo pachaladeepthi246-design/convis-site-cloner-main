@@ -83,6 +83,8 @@ const Carousel = React.forwardRef<
       api?.scrollNext()
     }, [api])
 
+
+
     React.useEffect(() => {
       if (!api) {
         return
@@ -103,11 +105,11 @@ const Carousel = React.forwardRef<
           carouselRef,
           api: api,
           opts,
-          orientation,
           scrollPrev,
           scrollNext,
           canScrollPrev,
           canScrollNext,
+          orientation,
         }}
       >
         <div
