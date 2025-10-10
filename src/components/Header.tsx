@@ -1,16 +1,26 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { supabase } from '../lib/supabase';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/');
+  };
 
   const navItems = [
     { label: 'Home', href: '/' },
@@ -36,18 +46,52 @@ export default function Header() {
             <span className="text-2xl font-bold text-white">Clyrox</span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-white/90 hover:text-white transition-colors relative group"
-              >
-                {item.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full" />
-              </a>
-            ))}
-          </nav>
+          <div className="flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-white/90 hover:text-white transition-colors relative group"
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full" />
+                </a>
+              ))}
+            </nav>
+
+            <div className="hidden md:flex items-center gap-4">
+              {user ? (
+                <>
+                  <a
+                    href="/dashboard"
+                    className="backdrop-blur-xl bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg font-semibold border border-white/20 transition-all"
+                  >
+                    Dashboard
+                  </a>
+                  <button
+                    onClick={handleLogout}
+                    className="backdrop-blur-xl bg-red-500/20 hover:bg-red-500/30 text-white p-2 rounded-lg border border-red-500/30 transition-all"
+                    title="Logout"
+                  >
+                    <LogOut className="w-5 h-5" />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <a href="/login" className="text-white/90 hover:text-white transition-colors">
+                    Login
+                  </a>
+                  <a
+                    href="/signup"
+                    className="backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg font-semibold border border-white/30 transition-all"
+                  >
+                    Sign Up
+                  </a>
+                </>
+              )}
+            </div>
+          </div>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -77,6 +121,19 @@ export default function Header() {
                   {item.label}
                 </a>
               ))}
+              <div className="border-t border-white/20 pt-4 mt-2 flex flex-col gap-4">
+                {user ? (
+                  <>
+                    <a href="/dashboard" onClick={() => setIsOpen(false)} className="text-white/90 hover:text-white transition-colors py-2">Dashboard</a>
+                    <button onClick={handleLogout} className="text-left text-red-400 hover:text-red-300 transition-colors py-2">Logout</button>
+                  </>
+                ) : (
+                  <>
+                    <a href="/login" onClick={() => setIsOpen(false)} className="text-white/90 hover:text-white transition-colors py-2">Login</a>
+                    <a href="/signup" onClick={() => setIsOpen(false)} className="text-white/90 hover:text-white transition-colors py-2">Sign Up</a>
+                  </>
+                )}
+              </div>
             </nav>
           </motion.div>
         )}
