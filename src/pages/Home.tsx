@@ -75,23 +75,19 @@ const testimonials3 = [
 export default function Home() {
   return (
     <main>
-      <div className="h-screen w-full">
+      <div id="home" className="h-screen w-full">
         <HeroSlider />
       </div>
       
-      <AnimatedSectionWrapper>
+      <AnimatedSectionWrapper id="features">
         <Features />
       </AnimatedSectionWrapper>
       
-      <AnimatedSectionWrapper>
+      <AnimatedSectionWrapper id="how-it-works">
         <HowItWorks />
       </AnimatedSectionWrapper>
 
-      <AnimatedSectionWrapper>
-        <Logos3 />
-      </AnimatedSectionWrapper>
-
-      <AnimatedSectionWrapper>
+      <AnimatedSectionWrapper id="testimonials">
         <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
             <div className="flex flex-row gap-6 h-full">
                 <TestimonialsColumn testimonials={testimonials} duration={20} />
@@ -102,15 +98,20 @@ export default function Home() {
         </div>
       </AnimatedSectionWrapper>
 
-      <AnimatedSectionWrapper>
+      <AnimatedSectionWrapper id="pricing">
         <Pricing />
       </AnimatedSectionWrapper>
 
-      <AnimatedSectionWrapper>
+      <AnimatedSectionWrapper id="faq">
         <Faq />
       </AnimatedSectionWrapper>
 
-      <AnimatedSectionWrapper>
+      {/* Note: Logos and CTA are not in the main nav, so they don't need IDs unless we add them. */}
+      <AnimatedSectionWrapper id="partners">
+        <Logos3 />
+      </AnimatedSectionWrapper>
+
+      <AnimatedSectionWrapper id="cta">
         <Cta />
       </AnimatedSectionWrapper>
     </main>
