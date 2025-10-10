@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Briefcase, Users, MessageSquare, TrendingUp } from 'lucide-react';
+import { FileText, Briefcase, Users, MessageSquare } from 'lucide-react';
 import AnimatedSection from '../../components/AnimatedSection';
 import GlassCard from '../../components/GlassCard';
 import { supabase } from '../../lib/supabase';

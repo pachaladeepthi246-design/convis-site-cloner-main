@@ -5,6 +5,9 @@ import HeroSlider from '../components/HeroSlider';
 import AnimatedSection from '../components/AnimatedSection';
 import GlassCard from '../components/GlassCard';
 import { supabase, Service } from '../lib/supabase';
+import Testimonials from '../components/Testimonials';
+import LogoCloud from '../components/LogoCloud';
+import NewsletterSignup from '../components/NewsletterSignup';
 
 const iconMap: Record<string, any> = {
   briefcase: Briefcase,
@@ -91,10 +94,10 @@ export default function Home() {
 
             <AnimatedSection delay={0.2}>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Why Choose Clyrox?
+                Who We Are
               </h2>
               <p className="text-xl text-white/70 mb-8">
-                We are committed to delivering excellence through innovative solutions and personalized service.
+                We are a multi-service consulting firm dedicated to empowering businesses with innovative solutions and personalized service. Our mission is to help you navigate complexity and achieve sustainable growth.
               </p>
 
               <div className="space-y-4">
@@ -134,7 +137,7 @@ export default function Home() {
       <section className="relative py-24 px-6 bg-gradient-to-b from-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
           <AnimatedSection className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Approach</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Process</h2>
             <p className="text-xl text-white/70 max-w-3xl mx-auto">
               A systematic methodology designed to deliver exceptional results
             </p>
@@ -172,36 +175,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative py-24 px-6 bg-gradient-to-b from-slate-900 to-black">
-        <div className="max-w-5xl mx-auto text-center">
-          <AnimatedSection>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Transform Your Business?
-            </h2>
-            <p className="text-xl text-white/70 mb-10">
-              Let's discuss how we can help you achieve your goals
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.a
-                href="/contact"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="backdrop-blur-xl bg-white text-slate-900 px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/90 transition-all"
-              >
-                Get Started
-              </motion.a>
-              <motion.a
-                href="/services"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="backdrop-blur-xl bg-white/10 hover:bg-white/20 text-white px-10 py-4 rounded-full text-lg font-semibold border border-white/30 transition-all"
-              >
-                View All Services
-              </motion.a>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <Testimonials />
+      <LogoCloud />
+      <NewsletterSignup />
     </div>
   );
 }
