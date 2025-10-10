@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from './hooks/useParams';
+import { useParams } from 'react-router-dom';
 import { Briefcase, Users, Globe, Code, UserCheck, CheckCircle, ArrowRight } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import AnimatedSection from '../components/AnimatedSection';
@@ -28,7 +28,7 @@ const iconMap: Record<string, any> = {
 };
 
 export default function ServiceDetail() {
-  const slug = useParams();
+  const { slug } = useParams<{ slug: string }>();
   const [service, setService] = useState<Service | null>(null);
   const [relatedServices, setRelatedServices] = useState<Service[]>([]);
 
