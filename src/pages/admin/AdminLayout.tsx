@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { LayoutGrid, Briefcase, FileText, Users, LogOut, MessageSquare, Star } from 'lucide-react';
+import { LayoutGrid, Briefcase, FileText, Users, LogOut, MessageSquare, Star, Mail } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -10,6 +10,7 @@ const sidebarNavItems = [
   { href: '/admin/careers', icon: Users, label: 'Careers' },
   { href: '/admin/testimonials', icon: Star, label: 'Testimonials' },
   { href: '/admin/submissions', icon: MessageSquare, label: 'Submissions' },
+  { href: '/admin/newsletter', icon: Mail, label: 'Newsletter' },
 ];
 
 export default function AdminLayout() {

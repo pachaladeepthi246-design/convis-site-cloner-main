@@ -29,6 +29,7 @@ import CareerEditor from './pages/admin/CareerEditor';
 import ContactSubmissions from './pages/admin/ContactSubmissions';
 import TestimonialsManager from './pages/admin/TestimonialsManager';
 import TestimonialEditor from './pages/admin/TestimonialEditor';
+import NewsletterManager from './pages/admin/NewsletterManager';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import { AuthProvider } from './contexts/AuthContext';
@@ -80,6 +81,7 @@ function App() {
               <Route path="testimonials/new" element={<TestimonialEditor />} />
               <Route path="testimonials/edit/:id" element={<TestimonialEditor />} />
               <Route path="submissions" element={<ContactSubmissions />} />
+              <Route path="newsletter" element={<NewsletterManager />} />
             </Route>
 
             <Route

@@ -61,9 +61,16 @@ export interface ContactSubmission {
 
 export interface Testimonial {
   id: string;
+  created_at: string;
   name: string;
   title: string;
   quote: string;
   rating: number;
   is_active: boolean;
+}
+
+export interface NewsletterSubscription {
+  id: string;
+  email: string;
+  created_at: string;
 }
