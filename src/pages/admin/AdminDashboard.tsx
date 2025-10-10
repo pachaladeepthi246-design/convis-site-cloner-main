@@ -84,7 +84,7 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <AnimatedSection delay={0.2}>
           <GlassCard className="p-8">
             <div className="flex items-center gap-4 mb-6">
@@ -103,6 +103,50 @@ export default function AdminDashboard() {
                 className="w-full backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold border border-white/30 transition-all"
               >
                 Manage Services
+              </motion.button>
+            </Link>
+          </GlassCard>
+        </AnimatedSection>
+        <AnimatedSection delay={0.3}>
+          <GlassCard className="p-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                <FileText className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-white">Blog Management</h2>
+            </div>
+            <p className="text-white/70 mb-6">
+              Write, publish, and manage all of your company's blog posts and articles from one central location.
+            </p>
+            <Link to="/admin/blog">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold border border-white/30 transition-all"
+              >
+                Manage Blog
+              </motion.button>
+            </Link>
+          </GlassCard>
+        </AnimatedSection>
+        <AnimatedSection delay={0.4}>
+          <GlassCard className="p-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
+                <Users className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-white">Careers Management</h2>
+            </div>
+            <p className="text-white/70 mb-6">
+              Post new job openings, update existing listings, and manage the visibility of career opportunities.
+            </p>
+            <Link to="/admin/careers">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold border border-white/30 transition-all"
+              >
+                Manage Careers
               </motion.button>
             </Link>
           </GlassCard>

@@ -24,6 +24,8 @@ import ServicesManager from './pages/admin/ServicesManager';
 import ServiceEditor from './pages/admin/ServiceEditor';
 import BlogManager from './pages/admin/BlogManager';
 import BlogEditor from './pages/admin/BlogEditor';
+import CareersManager from './pages/admin/CareersManager';
+import CareerEditor from './pages/admin/CareerEditor';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -63,6 +65,9 @@ function App() {
               <Route path="blog" element={<BlogManager />} />
               <Route path="blog/new" element={<BlogEditor />} />
               <Route path="blog/edit/:id" element={<BlogEditor />} />
+              <Route path="careers" element={<CareersManager />} />
+              <Route path="careers/new" element={<CareerEditor />} />
+              <Route path="careers/edit/:id" element={<CareerEditor />} />
             </Route>
 
             <Route
