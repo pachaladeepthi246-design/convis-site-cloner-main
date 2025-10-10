@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { supabase, BlogPost } from '../../lib/supabase';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 export default function BlogEditor() {
   const { id } = useParams<{ id: string }>();
@@ -19,6 +20,7 @@ export default function BlogEditor() {
     is_published: false,
   });
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('write');
 
   useEffect(() => {
     if (id) {
@@ -81,10 +83,22 @@ export default function BlogEditor() {
           <label htmlFor="excerpt" className="block text-white mb-2 font-semibold">Excerpt</label>
           <textarea name="excerpt" value={post.excerpt} onChange={handleChange} rows={3} className="w-full bg-white/10 border border-white/20 text-white p-3 rounded-lg" />
         </div>
+        
         <div>
-          <label htmlFor="content" className="block text-white mb-2 font-semibold">Content (Markdown supported)</label>
-          <textarea name="content" value={post.content} onChange={handleChange} rows={10} className="w-full bg-white/10 border border-white/20 text-white p-3 rounded-lg font-mono" />
+          <label className="block text-white mb-2 font-semibold">Content</label>
+          <div className="flex border-b border-white/20 mb-2">
+            <button type="button" onClick={() => setActiveTab('write')} className={`px-4 py-2 font-semibold transition-colors ${activeTab === 'write' ? 'text-white border-b-2 border-primary' : 'text-white/60 hover:text-white/80'}`}>Write</button>
+            <button type="button" onClick={() => setActiveTab('preview')} className={`px-4 py-2 font-semibold transition-colors ${activeTab === 'preview' ? 'text-white border-b-2 border-primary' : 'text-white/60 hover:text-white/80'}`}>Preview</button>
+          </div>
+          {activeTab === 'write' ? (
+            <textarea name="content" value={post.content} onChange={handleChange} rows={15} className="w-full bg-white/10 border border-white/20 text-white p-3 rounded-lg font-mono" />
+          ) : (
+            <div className="prose prose-invert max-w-none text-white/80 p-4 rounded-lg bg-white/5 border border-white/20 min-h-[400px]">
+              <ReactMarkdown>{post.content || "Nothing to preview yet."}</ReactMarkdown>
+            </div>
+          )}
         </div>
+
         <div>
           <label htmlFor="featured_image" className="block text-white mb-2 font-semibold">Featured Image URL</label>
           <input type="text" name="featured_image" value={post.featured_image} onChange={handleChange} className="w-full bg-white/10 border border-white/20 text-white p-3 rounded-lg" />
