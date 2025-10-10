@@ -50,6 +50,8 @@ export interface Career {
 }
 
 export interface ContactSubmission {
+  id: string;
+  created_at: string;
   name: string;
   email: string;
   phone?: string;

@@ -151,6 +151,28 @@ export default function AdminDashboard() {
             </Link>
           </GlassCard>
         </AnimatedSection>
+        <AnimatedSection delay={0.5}>
+          <GlassCard className="p-8">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                <MessageSquare className="w-6 h-6 text-white" />
+              </div>
+              <h2 className="text-2xl font-bold text-white">Submissions</h2>
+            </div>
+            <p className="text-white/70 mb-6">
+              View and manage all incoming messages and inquiries from the website's contact form.
+            </p>
+            <Link to="/admin/submissions">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="w-full backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-xl font-semibold border border-white/30 transition-all"
+              >
+                View Submissions
+              </motion.button>
+            </Link>
+          </GlassCard>
+        </AnimatedSection>
       </div>
     </>
   );

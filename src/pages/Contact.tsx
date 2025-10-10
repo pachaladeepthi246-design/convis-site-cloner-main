@@ -7,7 +7,7 @@ import GlassCard from '../components/GlassCard';
 import { supabase, ContactSubmission } from '../lib/supabase';
 
 export default function Contact() {
-  const [formData, setFormData] = useState<ContactSubmission>({
+  const [formData, setFormData] = useState<Partial<ContactSubmission>>({
     name: '',
     email: '',
     phone: '',
