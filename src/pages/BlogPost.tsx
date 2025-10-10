@@ -6,6 +6,7 @@ import AnimatedSection from '../components/AnimatedSection';
 import GlassCard from '../components/GlassCard';
 import { supabase, BlogPost as BlogPostType } from '../lib/supabase';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
@@ -67,7 +68,7 @@ export default function BlogPost() {
               </div>
 
               <div className="prose prose-invert max-w-none text-white/80 text-lg leading-relaxed">
-                <p>{post.content}</p>
+                <ReactMarkdown>{post.content}</ReactMarkdown>
               </div>
 
               <div className="mt-12 border-t border-white/20 pt-8">

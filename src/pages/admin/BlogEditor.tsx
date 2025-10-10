@@ -82,8 +82,8 @@ export default function BlogEditor() {
           <textarea name="excerpt" value={post.excerpt} onChange={handleChange} rows={3} className="w-full bg-white/10 border border-white/20 text-white p-3 rounded-lg" />
         </div>
         <div>
-          <label htmlFor="content" className="block text-white mb-2 font-semibold">Content</label>
-          <textarea name="content" value={post.content} onChange={handleChange} rows={10} className="w-full bg-white/10 border border-white/20 text-white p-3 rounded-lg" />
+          <label htmlFor="content" className="block text-white mb-2 font-semibold">Content (Markdown supported)</label>
+          <textarea name="content" value={post.content} onChange={handleChange} rows={10} className="w-full bg-white/10 border border-white/20 text-white p-3 rounded-lg font-mono" />
         </div>
         <div>
           <label htmlFor="featured_image" className="block text-white mb-2 font-semibold">Featured Image URL</label>
