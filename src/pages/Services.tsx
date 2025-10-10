@@ -3,20 +3,7 @@ import { Briefcase, Users, Globe, Code, UserCheck, ArrowRight } from 'lucide-rea
 import PageHero from '../components/PageHero';
 import AnimatedSection from '../components/AnimatedSection';
 import GlassCard from '../components/GlassCard';
-import { supabase } from '../lib/supabase';
-
-interface Service {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  icon: string;
-  hero_image: string;
-  slug: string;
-  is_active: boolean;
-  order_index: number;
-  features: any[];
-}
+import { supabase, Service } from '../lib/supabase';
 
 const iconMap: Record<string, any> = {
   briefcase: Briefcase,

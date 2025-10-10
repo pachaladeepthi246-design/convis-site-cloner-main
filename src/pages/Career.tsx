@@ -3,18 +3,7 @@ import { MapPin, Briefcase, Clock, ArrowRight } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import AnimatedSection from '../components/AnimatedSection';
 import GlassCard from '../components/GlassCard';
-import { supabase } from '../lib/supabase';
-
-interface Career {
-  id: string;
-  title: string;
-  department: string;
-  location: string;
-  employment_type: string;
-  description: string;
-  is_active: boolean;
-  created_at: string;
-}
+import { supabase, Career } from '../lib/supabase';
 
 export default function CareerPage() {
   const [careers, setCareers] = useState<Career[]>([]);

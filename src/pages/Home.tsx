@@ -1,119 +1,207 @@
-import { HeroSlider } from "../components/HeroSlider";
-import { TestimonialsColumn } from "../components/ui/testimonials-columns-1";
-import { Logos3 } from "../components/ui/logos3";
-import { Features } from "../components/ui/features";
-import { Cta } from "../components/ui/cta";
-import { HowItWorks } from "../components/ui/how-it-works";
-import { Pricing } from "../components/ui/pricing";
-import { Faq } from "../components/ui/faq";
-import { AnimatedSectionWrapper } from "../components/AnimatedSectionWrapper";
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Briefcase, Users, Globe, Code, UserCheck, ArrowRight, CheckCircle, Target, Zap } from 'lucide-react';
+import HeroSlider from '../components/HeroSlider';
+import AnimatedSection from '../components/AnimatedSection';
+import GlassCard from '../components/GlassCard';
+import { supabase, Service } from '../lib/supabase';
 
-const testimonials = [
-  {
-    text: "The service was exceptional. They delivered everything on time and the quality was outstanding.",
-    image: "https://randomuser.me/api/portraits/women/1.jpg",
-    name: "Jane Doe",
-    role: "CEO, Company Inc.",
-  },
-  {
-    text: "A fantastic experience from start to finish. The team was professional, responsive, and incredibly talented.",
-    image: "https://randomuser.me/api/portraits/men/1.jpg",
-    name: "John Smith",
-    role: "CTO, Tech Solutions",
-  },
-  {
-    text: "I'm blown away by the results. They exceeded all my expectations and helped our business grow.",
-    image: "https://randomuser.me/api/portraits/women/2.jpg",
-    name: "Emily Johnson",
-    role: "Marketing Director, Growth Co.",
-  },
-];
-
-const testimonials2 = [
-    {
-      text: "Working with them was a game-changer. Their insights and expertise were invaluable to our project.",
-      image: "https://randomuser.me/api/portraits/men/2.jpg",
-      name: "Michael Brown",
-      role: "Product Manager, Innovate LLC",
-    },
-    {
-      text: "Highly recommended! Their attention to detail and commitment to quality is second to none.",
-      image: "https://randomuser.me/api/portraits/women/3.jpg",
-      name: "Sarah Davis",
-      role: "Founder, Creative Minds",
-    },
-    {
-      text: "An absolute pleasure to work with. They are true professionals who deliver exceptional results.",
-      image: "https://randomuser.me/api/portraits/men/3.jpg",
-      name: "David Wilson",
-      role: "Lead Developer, CodeCrafters",
-    },
-];
-
-const testimonials3 = [
-    {
-      text: "The best in the business. Their innovative solutions helped us solve our most complex challenges.",
-      image: "https://randomuser.me/api/portraits/women/4.jpg",
-      name: "Jessica Martinez",
-      role: "Operations Manager, Biz Group",
-    },
-    {
-      text: "I couldn't be happier with the outcome. The team went above and beyond to ensure our success.",
-      image: "https://randomuser.me/api/portraits/men/4.jpg",
-      name: "Chris Anderson",
-      role: "CEO, Future Enterprises",
-    },
-    {
-      text: "Their work is simply outstanding. I would recommend them to anyone looking for top-tier service.",
-      image: "https://randomuser.me/api/portraits/women/5.jpg",
-      name: "Laura Taylor",
-      role: "Creative Director, Design Hub",
-    },
-];
-
+const iconMap: Record<string, any> = {
+  briefcase: Briefcase,
+  users: Users,
+  globe: Globe,
+  code: Code,
+  'user-check': UserCheck,
+};
 
 export default function Home() {
+  const [services, setServices] = useState<Service[]>([]);
+
+  useEffect(() => {
+    loadServices();
+  }, []);
+
+  const loadServices = async () => {
+    const { data } = await supabase
+      .from('services')
+      .select('*')
+      .eq('is_active', true)
+      .order('order_index');
+    if (data) setServices(data);
+  };
+
+  const heroSlides = services.map((service) => ({
+    title: service.title,
+    subtitle: service.subtitle,
+    image: service.hero_image,
+    cta: 'Learn More',
+    link: `/services/${service.slug}`,
+  }));
+
   return (
-    <main>
-      <div id="home" className="h-screen w-full">
-        <HeroSlider />
-      </div>
-      
-      <AnimatedSectionWrapper id="features">
-        <Features />
-      </AnimatedSectionWrapper>
-      
-      <AnimatedSectionWrapper id="how-it-works">
-        <HowItWorks />
-      </AnimatedSectionWrapper>
+    <div className="min-h-screen">
+      {heroSlides.length > 0 && <HeroSlider slides={heroSlides} />}
 
-      <AnimatedSectionWrapper id="testimonials">
-        <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
-            <div className="flex flex-row gap-6 h-full">
-                <TestimonialsColumn testimonials={testimonials} duration={20} />
-                <TestimonialsColumn testimonials={testimonials2} duration={30} className="hidden md:flex" />
-                <TestimonialsColumn testimonials={testimonials3} duration={25} className="hidden lg:flex" />
-            </div>
-            <div className="pointer-events-none absolute inset-y-0 h-full w-full bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
+      <section className="relative py-24 px-6 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&w=1920')] opacity-5 bg-cover bg-center" />
+
+        <div className="relative max-w-7xl mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Services</h2>
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              Comprehensive solutions tailored to your business needs
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => {
+              const Icon = iconMap[service.icon] || Briefcase;
+              return (
+                <AnimatedSection key={service.id} delay={index * 0.1}>
+                  <GlassCard className="p-8 h-full flex flex-col">
+                    <div className="backdrop-blur-xl bg-white/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                      <Icon className="w-8 h-8 text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-3">{service.title}</h3>
+                    <p className="text-white/70 mb-6 flex-grow">{service.subtitle}</p>
+                    <a
+                      href={`/services/${service.slug}`}
+                      className="inline-flex items-center gap-2 text-white hover:gap-4 transition-all"
+                    >
+                      Explore Service <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </GlassCard>
+                </AnimatedSection>
+              );
+            })}
+          </div>
         </div>
-      </AnimatedSectionWrapper>
+      </section>
 
-      <AnimatedSectionWrapper id="pricing">
-        <Pricing />
-      </AnimatedSectionWrapper>
+      <section className="relative py-24 px-6 bg-gradient-to-b from-slate-900 to-slate-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <AnimatedSection>
+              <img
+                src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="About Us"
+                className="rounded-3xl shadow-2xl"
+              />
+            </AnimatedSection>
 
-      <AnimatedSectionWrapper id="faq">
-        <Faq />
-      </AnimatedSectionWrapper>
+            <AnimatedSection delay={0.2}>
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Why Choose Clyrox?
+              </h2>
+              <p className="text-xl text-white/70 mb-8">
+                We are committed to delivering excellence through innovative solutions and personalized service.
+              </p>
 
-      {/* Note: Logos and CTA are not in the main nav, so they don't need IDs unless we add them. */}
-      <AnimatedSectionWrapper id="partners">
-        <Logos3 />
-      </AnimatedSectionWrapper>
+              <div className="space-y-4">
+                {[
+                  'Expert team with industry-leading experience',
+                  'Tailored solutions for your unique needs',
+                  'Proven track record of success',
+                  '24/7 dedicated support',
+                ].map((item, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-center gap-3"
+                  >
+                    <CheckCircle className="w-6 h-6 text-emerald-400 flex-shrink-0" />
+                    <span className="text-white/80 text-lg">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
 
-      <AnimatedSectionWrapper id="cta">
-        <Cta />
-      </AnimatedSectionWrapper>
-    </main>
+              <motion.a
+                href="/about"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block mt-8 backdrop-blur-xl bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-full font-semibold border border-white/30 transition-all"
+              >
+                Learn More About Us
+              </motion.a>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-24 px-6 bg-gradient-to-b from-slate-800 to-slate-900">
+        <div className="max-w-7xl mx-auto">
+          <AnimatedSection className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Approach</h2>
+            <p className="text-xl text-white/70 max-w-3xl mx-auto">
+              A systematic methodology designed to deliver exceptional results
+            </p>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Target,
+                title: 'Discovery',
+                description: 'We start by understanding your goals, challenges, and vision',
+              },
+              {
+                icon: Zap,
+                title: 'Strategy',
+                description: 'Develop a comprehensive plan tailored to your specific needs',
+              },
+              {
+                icon: CheckCircle,
+                title: 'Execution',
+                description: 'Implement solutions with precision and ongoing support',
+              },
+            ].map((step, index) => (
+              <AnimatedSection key={index} delay={index * 0.15}>
+                <GlassCard className="p-8 text-center">
+                  <div className="backdrop-blur-xl bg-white/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <step.icon className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
+                  <p className="text-white/70">{step.description}</p>
+                </GlassCard>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-24 px-6 bg-gradient-to-b from-slate-900 to-black">
+        <div className="max-w-5xl mx-auto text-center">
+          <AnimatedSection>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Transform Your Business?
+            </h2>
+            <p className="text-xl text-white/70 mb-10">
+              Let's discuss how we can help you achieve your goals
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.a
+                href="/contact"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="backdrop-blur-xl bg-white text-slate-900 px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/90 transition-all"
+              >
+                Get Started
+              </motion.a>
+              <motion.a
+                href="/services"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="backdrop-blur-xl bg-white/10 hover:bg-white/20 text-white px-10 py-4 rounded-full text-lg font-semibold border border-white/30 transition-all"
+              >
+                View All Services
+              </motion.a>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+    </div>
   );
 }

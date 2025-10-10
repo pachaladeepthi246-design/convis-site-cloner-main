@@ -1,74 +1,73 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import ServiceDetail from './pages/ServiceDetail';
 import Career from './pages/Career';
-import CareerDetail from './pages/CareerDetail';
-import { Header } from './components/ui/header';
-import { Footer } from './components/ui/footer';
-import Contact from './pages/Contact';
 import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import VerifyEmail from './pages/VerifyEmail';
-import Dashboard from './pages/Dashboard';
-import Projects from './pages/dashboard/Projects.tsx';
-import Analytics from './pages/dashboard/Analytics.tsx';
-import Profile from './pages/dashboard/Profile.tsx';
-import Settings from './pages/dashboard/Settings.tsx';
-import Admin from './pages/Admin.tsx';
-import { AuthProvider } from './contexts/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
+import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 
 function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+
+    const originalPushState = window.history.pushState;
+    window.history.pushState = function(...args) {
+      originalPushState.apply(window.history, args);
+      handleLocationChange();
+    };
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a');
+
+      if (anchor && anchor.href && anchor.href.startsWith(window.location.origin)) {
+        e.preventDefault();
+        const url = new URL(anchor.href);
+        window.history.pushState({}, '', url.pathname);
+        handleLocationChange();
+        window.scrollTo(0, 0);
+      }
+    };
+
+    document.addEventListener('click', handleClick);
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      document.removeEventListener('click', handleClick);
+    };
+  }, []);
+
+  const renderPage = () => {
+    if (currentPath === '/') return <Home />;
+    if (currentPath === '/about') return <About />;
+    if (currentPath === '/services') return <Services />;
+    if (currentPath.startsWith('/services/')) return <ServiceDetail />;
+    if (currentPath === '/career') return <Career />;
+    if (currentPath === '/blog') return <Blog />;
+    if (currentPath === '/contact') return <Contact />;
+    if (currentPath === '/admin') return <Admin />;
+
+    return <Home />;
+  };
+
+  const isAdminPage = currentPath === '/admin';
+
   return (
-    <AuthProvider>
-      <Router>
-        <div className="min-h-screen bg-slate-900">
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/:slug" element={<ServiceDetail />} />
-            <Route path="/career" element={<Career />} />
-            <Route path="/career/:id" element={<CareerDetail />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
-
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <Admin />
-                </ProtectedRoute>
-              }
-            />
-
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              }
-            >
-              <Route path="projects" element={<Projects />} />
-              <Route path="analytics" element={<Analytics />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="settings" element={<Settings />} />
-            </Route>
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
-    </AuthProvider>
+    <div className="min-h-screen bg-slate-900">
+      {!isAdminPage && <Header />}
+      {renderPage()}
+      {!isAdminPage && <Footer />}
+    </div>
   );
 }
 

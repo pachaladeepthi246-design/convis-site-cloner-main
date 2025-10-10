@@ -8,3 +8,51 @@ if (!supabaseUrl || !supabaseAnonKey) {
 }
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+export interface Service {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: string;
+  hero_image: string;
+  features: Array<{ title: string; description: string }>;
+  order_index: number;
+  is_active: boolean;
+}
+
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  featured_image: string;
+  category: string;
+  tags: string[];
+  is_published: boolean;
+  published_at: string;
+}
+
+export interface Career {
+  id: string;
+  title: string;
+  department: string;
+  location: string;
+  employment_type: string;
+  description: string;
+  requirements: string[];
+  responsibilities: string[];
+  salary_range?: string;
+  is_active: boolean;
+}
+
+export interface ContactSubmission {
+  name: string;
+  email: string;
+  phone?: string;
+  service_interest?: string;
+  message: string;
+}

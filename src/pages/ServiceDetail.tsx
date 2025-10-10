@@ -1,23 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from './hooks/useParams';
 import { Briefcase, Users, Globe, Code, UserCheck, CheckCircle, ArrowRight } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import AnimatedSection from '../components/AnimatedSection';
 import GlassCard from '../components/GlassCard';
-import { supabase } from '../lib/supabase';
-
-interface Service {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  icon: string;
-  hero_image: string;
-  slug: string;
-  is_active: boolean;
-  order_index: number;
-  features: any[];
-}
+import { supabase, Service } from '../lib/supabase';
 
 const iconMap: Record<string, any> = {
   briefcase: Briefcase,
@@ -28,7 +15,7 @@ const iconMap: Record<string, any> = {
 };
 
 export default function ServiceDetail() {
-  const { slug } = useParams<{ slug: string }>();
+  const slug = useParams();
   const [service, setService] = useState<Service | null>(null);
   const [relatedServices, setRelatedServices] = useState<Service[]>([]);
 
