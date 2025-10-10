@@ -58,3 +58,12 @@ export interface ContactSubmission {
   service_interest?: string;
   message: string;
 }
+
+export interface Testimonial {
+  id: string;
+  name: string;
+  title: string;
+  quote: string;
+  rating: number;
+  is_active: boolean;
+}

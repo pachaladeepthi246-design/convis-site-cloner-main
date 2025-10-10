@@ -27,6 +27,8 @@ import BlogEditor from './pages/admin/BlogEditor';
 import CareersManager from './pages/admin/CareersManager';
 import CareerEditor from './pages/admin/CareerEditor';
 import ContactSubmissions from './pages/admin/ContactSubmissions';
+import TestimonialsManager from './pages/admin/TestimonialsManager';
+import TestimonialEditor from './pages/admin/TestimonialEditor';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import { AuthProvider } from './contexts/AuthContext';
@@ -74,6 +76,9 @@ function App() {
               <Route path="careers" element={<CareersManager />} />
               <Route path="careers/new" element={<CareerEditor />} />
               <Route path="careers/edit/:id" element={<CareerEditor />} />
+              <Route path="testimonials" element={<TestimonialsManager />} />
+              <Route path="testimonials/new" element={<TestimonialEditor />} />
+              <Route path="testimonials/edit/:id" element={<TestimonialEditor />} />
               <Route path="submissions" element={<ContactSubmissions />} />
             </Route>
 

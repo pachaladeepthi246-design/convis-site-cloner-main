@@ -1,36 +1,30 @@
+import { useState, useEffect } from 'react';
 import { Star } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 import GlassCard from './GlassCard';
 import AnimatedSection from './AnimatedSection';
-
-const testimonialData = [
-  {
-    name: 'Sarah Johnson',
-    title: 'CEO, Tech Innovators',
-    quote: "Clyrox transformed our business strategy. Their team's expertise and dedication were instrumental in our growth. We saw a 200% increase in efficiency within the first six months.",
-    rating: 5,
-  },
-  {
-    name: 'Michael Chen',
-    title: 'HR Director, Global Solutions',
-    quote: "The employment and visa consulting services are second to none. They simplified a complex process, saving us countless hours and ensuring full compliance. Highly recommended.",
-    rating: 5,
-  },
-  {
-    name: 'Emily Rodriguez',
-    title: 'Founder, Creative Designs Co.',
-    quote: "From concept to launch, the design and development team was incredible. They brought our vision to life with a stunning website that has significantly boosted our online presence.",
-    rating: 5,
-  },
-  {
-    name: 'David Lee',
-    title: 'Operations Manager, Logistics Pro',
-    quote: "Their staffing services provided us with top-tier talent exactly when we needed it. Clyrox understands our industry and consistently delivers quality candidates.",
-    rating: 4,
-  },
-];
+import { supabase, Testimonial } from '../lib/supabase';
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+
+  useEffect(() => {
+    loadTestimonials();
+  }, []);
+
+  const loadTestimonials = async () => {
+    const { data } = await supabase
+      .from('testimonials')
+      .select('*')
+      .eq('is_active', true)
+      .order('created_at', { ascending: false });
+    if (data) setTestimonials(data);
+  };
+
+  if (testimonials.length === 0) {
+    return null; // Don't render the section if there are no testimonials
+  }
+
   return (
     <section className="relative py-24 px-6 bg-gradient-to-b from-slate-900 to-slate-800">
       <div className="max-w-7xl mx-auto">
@@ -50,8 +44,8 @@ export default function Testimonials() {
             className="w-full"
           >
             <CarouselContent>
-              {testimonialData.map((testimonial, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+              {testimonials.map((testimonial) => (
+                <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-4 h-full">
                     <GlassCard className="p-8 h-full flex flex-col justify-between" hover={false}>
                       <div>
