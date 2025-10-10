@@ -1,8 +1,12 @@
+import { HeroSlider } from "../components/HeroSlider";
 import { TestimonialsColumn } from "../components/ui/testimonials-columns-1";
 import { Logos3 } from "../components/ui/logos3";
 import { Features } from "../components/ui/features";
 import { Cta } from "../components/ui/cta";
-import { motion } from "framer-motion";
+import { HowItWorks } from "../components/ui/how-it-works";
+import { Pricing } from "../components/ui/pricing";
+import { Faq } from "../components/ui/faq";
+import { AnimatedSectionWrapper } from "../components/AnimatedSectionWrapper";
 
 const testimonials = [
   {
@@ -71,53 +75,44 @@ const testimonials3 = [
 export default function Home() {
   return (
     <main>
-      <div className="py-20">
-        <div className="container mx-auto grid grid-cols-1 gap-10 text-center lg:grid-cols-2 lg:text-left">
-          <div className="flex flex-col items-center gap-8 lg:items-start">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
-              A better way to build products
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-white/70">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem
-              cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat
-              aliqua.
-            </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-              <a
-                href="#"
-                className="rounded-md bg-white px-4 py-2 text-slate-900"
-              >
-                Get started
-              </a>
-              <a href="#" className="text-sm font-semibold leading-6 text-white">
-                Learn more <span aria-hidden="true">→</span>
-              </a>
+      <div className="h-screen w-full">
+        <HeroSlider />
+      </div>
+      
+      <AnimatedSectionWrapper>
+        <Features />
+      </AnimatedSectionWrapper>
+      
+      <AnimatedSectionWrapper>
+        <HowItWorks />
+      </AnimatedSectionWrapper>
+
+      <AnimatedSectionWrapper>
+        <Logos3 />
+      </AnimatedSectionWrapper>
+
+      <AnimatedSectionWrapper>
+        <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
+            <div className="flex flex-row gap-6 h-full">
+                <TestimonialsColumn testimonials={testimonials} duration={20} />
+                <TestimonialsColumn testimonials={testimonials2} duration={30} className="hidden md:flex" />
+                <TestimonialsColumn testimonials={testimonials3} duration={25} className="hidden lg:flex" />
             </div>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <img
-              src="https://placehold.co/1200x800/0e172a/ffffff?text=Your+App"
-              alt="Product screenshot"
-              className="rounded-2xl shadow-2xl"
-            />
-          </motion.div>
+            <div className="pointer-events-none absolute inset-y-0 h-full w-full bg-gradient-to-b from-slate-900 via-transparent to-slate-900"></div>
         </div>
-      </div>
-      <Features />
-      <Logos3 />
-      <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg">
-        <div className="flex flex-row gap-6">
-            <TestimonialsColumn testimonials={testimonials} duration={20} />
-            <TestimonialsColumn testimonials={testimonials2} duration={30} className="hidden md:flex" />
-            <TestimonialsColumn testimonials={testimonials3} duration={25} className="hidden lg:flex" />
-        </div>
-        <div className="pointer-events-none absolute inset-y-0 h-full w-full bg-gradient-to-b from-transparent to-slate-900"></div>
-      </div>
-      <Cta />
+      </AnimatedSectionWrapper>
+
+      <AnimatedSectionWrapper>
+        <Pricing />
+      </AnimatedSectionWrapper>
+
+      <AnimatedSectionWrapper>
+        <Faq />
+      </AnimatedSectionWrapper>
+
+      <AnimatedSectionWrapper>
+        <Cta />
+      </AnimatedSectionWrapper>
     </main>
   );
 }
