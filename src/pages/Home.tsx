@@ -1,6 +1,7 @@
 import { TestimonialsColumn } from "../components/ui/testimonials-columns-1";
 import { Logos3 } from "../components/ui/logos3";
 import { Features } from "../components/ui/features";
+import { Cta } from "../components/ui/cta";
 
 const testimonials = [
   {
@@ -102,6 +103,7 @@ export default function Home() {
         </div>
         <div className="pointer-events-none absolute inset-y-0 h-full w-full bg-gradient-to-b from-transparent to-slate-900"></div>
       </div>
+      <Cta />
     </main>
   );
 }
