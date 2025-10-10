@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
+import { Calendar, User, ArrowRight, Tag, Search } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import AnimatedSection from '../components/AnimatedSection';
 import GlassCard from '../components/GlassCard';
@@ -8,10 +8,17 @@ import { supabase, BlogPost } from '../lib/supabase';
 export default function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    loadPosts();
-  }, [selectedCategory]);
+    const handler = setTimeout(() => {
+      loadPosts();
+    }, 300); // Debounce search input
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [selectedCategory, searchQuery]);
 
   const loadPosts = async () => {
     let query = supabase
@@ -22,6 +29,11 @@ export default function Blog() {
 
     if (selectedCategory !== 'all') {
       query = query.eq('category', selectedCategory);
+    }
+
+    if (searchQuery.trim()) {
+      const searchString = `%${searchQuery.trim()}%`;
+      query = query.or(`title.ilike.${searchString},excerpt.ilike.${searchString}`);
     }
 
     const { data } = await query;
@@ -48,6 +60,19 @@ export default function Blog() {
 
       <section className="relative py-24 px-6 bg-gradient-to-b from-slate-900 to-black">
         <div className="max-w-7xl mx-auto">
+          <AnimatedSection className="mb-8">
+            <div className="max-w-2xl mx-auto relative">
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full backdrop-blur-xl bg-white/10 border border-white/20 text-white placeholder-white/50 px-6 py-4 rounded-full focus:outline-none focus:border-white/40 pl-14"
+              />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-white/50" />
+            </div>
+          </AnimatedSection>
+
           <AnimatedSection className="mb-12">
             <div className="flex flex-wrap gap-3 justify-center">
               {categories.map((category) => (
@@ -70,7 +95,7 @@ export default function Blog() {
             <AnimatedSection>
               <GlassCard className="p-12 text-center">
                 <p className="text-xl text-white/70">
-                  No blog posts available at the moment. Check back soon for updates!
+                  No blog posts found. Try adjusting your search or filters.
                 </p>
               </GlassCard>
             </AnimatedSection>
