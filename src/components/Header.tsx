@@ -41,9 +41,8 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3">
-            <img src="/clyrox.jpg" alt="Logo" className="h-12 w-12 rounded-lg object-cover" />
-            <span className="text-2xl font-bold text-white">Clyrox</span>
+          <a href="/" className="flex items-center">
+            <img src="/clyrox.jpg" alt="Clyrox Logo" className="h-10" />
           </a>
 
           <div className="flex items-center gap-8">

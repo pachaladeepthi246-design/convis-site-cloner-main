@@ -24,9 +24,8 @@ export default function Footer() {
       <div className="relative max-w-7xl mx-auto px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           <div>
-            <div className="flex items-center gap-3 mb-6">
-              <img src="/clyrox.jpg" alt="Logo" className="h-12 w-12 rounded-lg object-cover" />
-              <span className="text-2xl font-bold">Clyrox</span>
+            <div className="mb-6">
+              <img src="/clyrox.jpg" alt="Clyrox Logo" className="h-12" />
             </div>
             <p className="text-white/70 mb-6">
               Your trusted partner for business consulting, employment solutions, visa services, and digital innovation.
